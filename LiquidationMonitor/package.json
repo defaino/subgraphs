@@ -1,6 +1,7 @@
 {
-  "name": "subgraph",
-  "license": "MIT",
+  "name": "liquidation-monitor",
+  "author": "Distributed Lab",
+  "license": "GPL-3.0",
   "scripts": {
     "compile": "graph codegen && graph build",
     "codegen": "graph codegen",

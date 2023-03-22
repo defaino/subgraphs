@@ -1,0 +1,12 @@
+type User @entity {
+  id: Bytes! # address
+
+  borowed: BigInt!
+}
+
+type GlobalList @entity {
+  id: String! # GlobalList
+
+  list: [User!]!
+  liquidationList: [User!]!
+}
