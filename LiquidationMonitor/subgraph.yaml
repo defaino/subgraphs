@@ -21,9 +21,9 @@ dataSources:
         - name: DefiCore
           file: ./abis/DefiCore.json
       eventHandlers:
-        - event: Borrowed(indexed address,address,indexed bytes32,uint256)
+        - event: Borrowed(indexed address,address,indexed bytes32,uint256,uint256)
           handler: onBorrowed
-        - event: BorrowRepaid(indexed address,indexed bytes32,uint256)
-          handler: onBorrowRepaid  
+        - event: BorrowRepaid(indexed address,indexed bytes32,uint256,uint256)
+          handler: onBorrowRepaid
       blockHandlers:
         - handler: onBlock

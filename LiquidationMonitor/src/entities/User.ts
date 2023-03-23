@@ -7,8 +7,7 @@ export function getUser(userAddress: Address): User {
   if (user == null) {
     user = new User(userAddress);
 
-    user.borowed = BigInt.zero();
-    user.liquidationAmount = BigInt.zero();
+    user.borrowed = BigInt.zero();
   }
 
   return user;

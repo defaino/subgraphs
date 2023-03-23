@@ -1,7 +1,7 @@
 import { GlobalList } from "../../generated/schema";
 import { GLOBAL_LIST_ID } from "./Globals";
 
-export function getGlobalList() {
+export function getGlobalList(): GlobalList {
   let globalList = GlobalList.load(GLOBAL_LIST_ID);
 
   if (globalList == null) {

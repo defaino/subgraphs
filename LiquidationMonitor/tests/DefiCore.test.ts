@@ -10,6 +10,7 @@ export function createBorrowed(
   recipient: Address,
   assetKey: Bytes,
   borrowedAmount: BigInt,
+  borrowedAmountInUSD: BigInt,
   sender: Address,
   block: ethereum.Block,
   tx: ethereum.Transaction
@@ -21,6 +22,9 @@ export function createBorrowed(
   event.parameters.push(new ethereum.EventParam("recipient", ethereum.Value.fromAddress(recipient)));
   event.parameters.push(new ethereum.EventParam("assetKey", ethereum.Value.fromBytes(assetKey)));
   event.parameters.push(new ethereum.EventParam("borrowedAmount", ethereum.Value.fromUnsignedBigInt(borrowedAmount)));
+  event.parameters.push(
+    new ethereum.EventParam("borrowedAmountInUSD", ethereum.Value.fromUnsignedBigInt(borrowedAmountInUSD))
+  );
 
   event.block = block;
   event.transaction = tx;
@@ -33,6 +37,7 @@ function createBorrowRepaid(
   userAddr: Address,
   assetKey: Bytes,
   repaidAmount: BigInt,
+  repaidAmountInUSD: BigInt,
   sender: Address,
   block: ethereum.Block,
   tx: ethereum.Transaction
@@ -43,6 +48,9 @@ function createBorrowRepaid(
   event.parameters.push(new ethereum.EventParam("userAddr", ethereum.Value.fromAddress(userAddr)));
   event.parameters.push(new ethereum.EventParam("assetKey", ethereum.Value.fromBytes(assetKey)));
   event.parameters.push(new ethereum.EventParam("repaidAmount", ethereum.Value.fromUnsignedBigInt(repaidAmount)));
+  event.parameters.push(
+    new ethereum.EventParam("repaidAmountInUSD", ethereum.Value.fromUnsignedBigInt(repaidAmountInUSD))
+  );
 
   event.block = block;
   event.transaction = tx;
@@ -63,7 +71,7 @@ describe("DefiCore", () => {
     const borrowedAmount = BigInt.fromI32(10).times(BigInt.fromI32(18));
     const usdAmount = BigInt.fromI32(10).times(BigInt.fromI32(17));
 
-    const event = createBorrowed(borrower, recipient, assetKey, borrowedAmount, contractSender, block, tx);
+    const event = createBorrowed(borrower, recipient, assetKey, borrowedAmount, usdAmount, contractSender, block, tx);
 
     onBorrowed(event);
 
@@ -77,7 +85,7 @@ describe("DefiCore", () => {
     const repaidAmount = BigInt.fromI32(10).times(BigInt.fromI32(18));
     const usdAmount = BigInt.fromI32(10).times(BigInt.fromI32(17)).minus(BigInt.fromI32(1));
 
-    const event = createBorrowRepaid(borrower, assetKey, repaidAmount, contractSender, block, tx);
+    const event = createBorrowRepaid(borrower, assetKey, repaidAmount, usdAmount, contractSender, block, tx);
 
     onBorrowRepaid(event);
 
@@ -91,7 +99,7 @@ describe("DefiCore", () => {
     const repaidAmount = BigInt.fromI32(10).times(BigInt.fromI32(18));
     const usdAmount = BigInt.fromI32(1);
 
-    const event = createBorrowRepaid(borrower, assetKey, repaidAmount, contractSender, block, tx);
+    const event = createBorrowRepaid(borrower, assetKey, repaidAmount, usdAmount, contractSender, block, tx);
 
     onBorrowRepaid(event);
 

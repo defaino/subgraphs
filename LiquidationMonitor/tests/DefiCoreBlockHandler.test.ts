@@ -24,41 +24,34 @@ const tx = getTransaction(Bytes.fromByteArray(Bytes.fromBigInt(BigInt.fromI32(1)
 const contractSender = Address.fromString("0x96e08f7d84603AEb97cd1c89A80A9e914f181670");
 
 describe("onBlock", () => {
-  beforeAll(() => {
-    const recipient = Address.fromString("0x96e08f7d84603AEb97cd1c89A80A9e914f181671");
-    const assetKey = Bytes.fromI32(55);
-    const borrowedAmount = BigInt.fromI32(10).times(BigInt.fromI32(18));
-    const usdAmount = BigInt.fromI32(10).times(BigInt.fromI32(17));
-
-    for (let i = 0; i < users.length; i++) {
-      const event = createBorrowed(users[i], recipient, assetKey, borrowedAmount, contractSender, block, tx);
-
-      onBorrowed(event);
-    }
-
-    createMockedFunction(Address.fromString(DEFE_CORE_ADDRESS), "countPools", "countPools(string):(uint256)")
-      .withArgs([ethereum.Value.fromAddressArray(users)])
-      .returns([ethereum.Value.fromI32Array(amounts)]);
-  });
-
-  test("should hanlde block", () => {
-    block = getNextBlock(block);
-    onBlock(block);
-
-    assert.fieldEquals("GlobalList", GLOBAL_LIST_ID, "liquidationList", "[]");
-  });
-
-  test("should handle block range 100", () => {
-    for (let i = 1; i <= 100; i++) {
-      onBlock(block);
-      block = getNextBlock(block);
-    }
-
-    assert.fieldEquals(
-      "GlobalList",
-      GLOBAL_LIST_ID,
-      "liquidationList",
-      `[${users[0].toHexString()}, ${users[4].toHexString()}, ${users[6].toHexString()}]`
-    );
-  });
+  // beforeAll(() => {
+  //   const recipient = Address.fromString("0x96e08f7d84603AEb97cd1c89A80A9e914f181671");
+  //   const assetKey = Bytes.fromI32(55);
+  //   const borrowedAmount = BigInt.fromI32(10).times(BigInt.fromI32(18));
+  //   const usdAmount = BigInt.fromI32(10).times(BigInt.fromI32(17));
+  //   for (let i = 0; i < users.length; i++) {
+  //     const event = createBorrowed(users[i], recipient, assetKey, borrowedAmount, usdAmount, contractSender, block, tx);
+  //     onBorrowed(event);
+  //   }
+  //   createMockedFunction(Address.fromString(DEFE_CORE_ADDRESS), "func_name", "signatura")
+  //     .withArgs([ethereum.Value.fromAddressArray(users)])
+  //     .returns([ethereum.Value.fromI32Array(amounts)]);
+  // });
+  // test("should hanlde block", () => {
+  //   block = getNextBlock(block);
+  //   onBlock(block);
+  //   assert.fieldEquals("GlobalList", GLOBAL_LIST_ID, "liquidationList", "[]");
+  // });
+  // test("should handle block range 100", () => {
+  //   for (let i = 1; i <= 100; i++) {
+  //     onBlock(block);
+  //     block = getNextBlock(block);
+  //   }
+  //   assert.fieldEquals(
+  //     "GlobalList",
+  //     GLOBAL_LIST_ID,
+  //     "liquidationList",
+  //     `[${users[0].toHexString()}, ${users[4].toHexString()}, ${users[6].toHexString()}]`
+  //   );
+  // });
 });

@@ -1,893 +1,905 @@
 [
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "repaidAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "BorrowRepaid",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "borrower",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "recipient",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "borrowedAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "Borrowed",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "newValue",
-          "type": "bool"
-        }
-      ],
-      "name": "CollateralUpdated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "delegateeAddr",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "newAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "DelegateBorrowApproved",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "rewardAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "DistributionRewardWithdrawn",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint8",
-          "name": "version",
-          "type": "uint8"
-        }
-      ],
-      "name": "Initialized",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "bytes32",
-          "name": "supplyAssetKey_",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "bytes32",
-          "name": "borrowAssetKey_",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "liquidationAmount_",
-          "type": "uint256"
-        }
-      ],
-      "name": "Liquidation",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "liquidityAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "LiquidityAdded",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "address",
-          "name": "userAddr",
-          "type": "address"
-        },
-        {
-          "indexed": true,
-          "internalType": "bytes32",
-          "name": "assetKey",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "liquidityAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "LiquidityWithdrawn",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
-      ],
-      "name": "Paused",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "account",
-          "type": "address"
-        }
-      ],
-      "name": "Unpaused",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "liquidityAmount_",
-          "type": "uint256"
-        }
-      ],
-      "name": "addLiquidity",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "approveAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "delegateeAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "currentAllowance_",
-          "type": "uint256"
-        }
-      ],
-      "name": "approveToDelegateBorrow",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "borrowAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "recipientAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "borrowFor",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32[]",
-          "name": "assetKeys_",
-          "type": "bytes32[]"
-        },
-        {
-          "internalType": "bool",
-          "name": "isAllPools_",
-          "type": "bool"
-        }
-      ],
-      "name": "claimDistributionRewards",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "totalReward_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "defiCoreInitialize",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "borrowAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "borrowerAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "delegateBorrow",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "repayAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "recipientAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bool",
-          "name": "isMaxRepay_",
-          "type": "bool"
-        }
-      ],
-      "name": "delegateRepayBorrow",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "",
-          "type": "bytes32"
-        }
-      ],
-      "name": "disabledCollateralAssets",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "getAvailableLiquidity",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "getCurrentBorrowLimitInUSD",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "currentBorrowLimit_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getInjector",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "_injector",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getMaxToBorrow",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getMaxToRepay",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getMaxToSupply",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "maxToSupply_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getMaxToWithdraw",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "maxToWithdraw_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tokensAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "isAdding_",
-          "type": "bool"
-        }
-      ],
-      "name": "getNewBorrowLimitInUSD",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "getTotalBorrowBalanceInUSD",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "totalBorrowBalance_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        }
-      ],
-      "name": "getTotalSupplyBalanceInUSD",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "totalSupplyBalance_",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getUserBorrowedAmount",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "getUserLiquidityAmount",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        }
-      ],
-      "name": "isCollateralAssetEnabled",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "userAddr_",
-          "type": "address"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "supplyAssetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "bytes32",
-          "name": "borrowAssetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "liquidationAmount_",
-          "type": "uint256"
-        }
-      ],
-      "name": "liquidation",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "pause",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "paused",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "repayAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "isMaxRepay_",
-          "type": "bool"
-        }
-      ],
-      "name": "repayBorrow",
-      "outputs": [],
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "contractsRegistry_",
-          "type": "address"
-        }
-      ],
-      "name": "setDependencies",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_injector",
-          "type": "address"
-        }
-      ],
-      "name": "setInjector",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "unpause",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "bool",
-          "name": "isDisabled_",
-          "type": "bool"
-        }
-      ],
-      "name": "updateCollateral",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "bool",
-          "name": "withInterval_",
-          "type": "bool"
-        }
-      ],
-      "name": "updateCompoundRate",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "bytes32",
-          "name": "assetKey_",
-          "type": "bytes32"
-        },
-        {
-          "internalType": "uint256",
-          "name": "liquidityAmount_",
-          "type": "uint256"
-        },
-        {
-          "internalType": "bool",
-          "name": "isMaxWithdraw_",
-          "type": "bool"
-        }
-      ],
-      "name": "withdrawLiquidity",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    }
-  ]
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "repaidAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "repaidAmountInUSD",
+        "type": "uint256"
+      }
+    ],
+    "name": "BorrowRepaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "borrower",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "recipient",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "borrowedAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "borrowedAmountInUSD",
+        "type": "uint256"
+      }
+    ],
+    "name": "Borrowed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "newValue",
+        "type": "bool"
+      }
+    ],
+    "name": "CollateralUpdated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "delegateeAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "newAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DelegateBorrowApproved",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "rewardAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "DistributionRewardWithdrawn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "version",
+        "type": "uint8"
+      }
+    ],
+    "name": "Initialized",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "supplyAssetKey_",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "borrowAssetKey_",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "liquidationAmount_",
+        "type": "uint256"
+      }
+    ],
+    "name": "Liquidated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "liquidityAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "LiquidityAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "userAddr",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "bytes32",
+        "name": "assetKey",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "liquidityAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "LiquidityWithdrawn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityAmount_",
+        "type": "uint256"
+      }
+    ],
+    "name": "addLiquidity",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "approveAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "delegateeAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "currentAllowance_",
+        "type": "uint256"
+      }
+    ],
+    "name": "approveToDelegateBorrow",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "borrowAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "recipientAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "borrowFor",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32[]",
+        "name": "assetKeys_",
+        "type": "bytes32[]"
+      },
+      {
+        "internalType": "bool",
+        "name": "isAllPools_",
+        "type": "bool"
+      }
+    ],
+    "name": "claimDistributionRewards",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalReward_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "defiCoreInitialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "borrowAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "borrowerAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "delegateBorrow",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "repayAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "recipientAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "isMaxRepay_",
+        "type": "bool"
+      }
+    ],
+    "name": "delegateRepayBorrow",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "disabledCollateralAssets",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "getAvailableLiquidity",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "getCurrentBorrowLimitInUSD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "currentBorrowLimit_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getInjector",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "_injector",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMaxToBorrow",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMaxToRepay",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMaxToSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "maxToSupply_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getMaxToWithdraw",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "maxToWithdraw_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "tokensAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isAdding_",
+        "type": "bool"
+      }
+    ],
+    "name": "getNewBorrowLimitInUSD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "getTotalBorrowBalanceInUSD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalBorrowBalance_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      }
+    ],
+    "name": "getTotalSupplyBalanceInUSD",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "totalSupplyBalance_",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getUserBorrowedAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "getUserLiquidityAmount",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      }
+    ],
+    "name": "isCollateralAssetEnabled",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "userAddr_",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "supplyAssetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "borrowAssetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidationAmount_",
+        "type": "uint256"
+      }
+    ],
+    "name": "liquidation",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "repayAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isMaxRepay_",
+        "type": "bool"
+      }
+    ],
+    "name": "repayBorrow",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "contractsRegistry_",
+        "type": "address"
+      }
+    ],
+    "name": "setDependencies",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_injector",
+        "type": "address"
+      }
+    ],
+    "name": "setInjector",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "isDisabled_",
+        "type": "bool"
+      }
+    ],
+    "name": "updateCollateral",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bool",
+        "name": "withInterval_",
+        "type": "bool"
+      }
+    ],
+    "name": "updateCompoundRate",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "assetKey_",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "liquidityAmount_",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bool",
+        "name": "isMaxWithdraw_",
+        "type": "bool"
+      }
+    ],
+    "name": "withdrawLiquidity",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+]
