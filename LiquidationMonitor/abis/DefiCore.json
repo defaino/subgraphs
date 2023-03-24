@@ -464,6 +464,30 @@
   {
     "inputs": [
       {
+        "internalType": "address[]",
+        "name": "usersArr_",
+        "type": "address[]"
+      }
+    ],
+    "name": "getAvailableLiquidityBatch",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "availableArr_",
+        "type": "uint256[]"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "debtsArr_",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "userAddr_",
         "type": "address"
