@@ -3,7 +3,7 @@ import { Borrowed, BorrowRepaid, DefiCore } from "../../generated/DefiCore/DefiC
 import { getUser } from "../entities/User";
 import { getGlobalList } from "../entities/GlobalList";
 import { extendArray, reduceArray } from "../helpers/ArrayHelper";
-import { BATCH_SIZE, BLOCK_INTERVAL, DEFE_CORE_ADDRESS } from "../entities/Globals";
+import { BATCH_SIZE, BLOCK_INTERVAL, DEFI_CORE_ADDRESS } from "../entities/Globals";
 
 export function onBorrowed(event: Borrowed): void {
   let user = getUser(event.params.borrower);
@@ -35,7 +35,7 @@ export function onBlock(block: ethereum.Block): void {
   if (block.number.mod(BigInt.fromI32(BLOCK_INTERVAL)).equals(BigInt.zero())) {
     let globalList = getGlobalList();
     if (globalList.list.length > 0) {
-      let dcProptotype = DefiCore.bind(Address.fromString(DEFE_CORE_ADDRESS));
+      let dcProptotype = DefiCore.bind(Address.fromString(DEFI_CORE_ADDRESS));
       let iters = Math.ceil(F64.parseFloat(globalList.list.length.toString()) / BATCH_SIZE);
       let newLiquidationList = new Array<Bytes>();
 
