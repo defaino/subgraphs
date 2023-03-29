@@ -61,6 +61,12 @@ async function getConfig() {
   );
 
   fs.writeFileSync("./package.json", JSON.stringify(pkg));
+
+  let globalsFile = fs.readFileSync("./src/entities/Globals.ts")
+
+  let newContent = globalsFile.toString().replace('"0x0000000000000000000000000000000000000000"', config.addresses[contractName]);
+
+  fs.writeFileSync(newContent);
 }
 
 getConfig().then();
