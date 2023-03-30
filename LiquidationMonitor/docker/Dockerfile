@@ -1,7 +1,7 @@
 FROM node:16-alpine
 RUN apk add --no-cache make gcc g++ python3
 
-WORKDIR /tokene-graph
+WORKDIR /liquidation-monitor
 
 COPY docker/package.json ./
 COPY docker/package-lock.json ./
