@@ -1,0 +1,20 @@
+{
+  "name": "liquidation-monitor",
+  "author": "Distributed Lab",
+  "license": "GPL-3.0",
+  "scripts": {
+      "compile": "graph codegen && graph build",
+      "create": "graph create --node $GRAPH_NODE_ENDPOINT <liquidation-monitor>",
+      "remove": "graph remove --node $GRAPH_NODE_ENDPOINT <liquidation-monitor>",
+      "deploy": "npm run compile && graph deploy --node $GRAPH_NODE_ENDPOINT --ipfs $IPFS_ENDPOINT --version-label $GRAPH_VERSION <liquidation-monitor>",
+      "update-config": "node scripts/config-parser.js"
+    },
+    "dependencies": {
+      "@graphprotocol/graph-cli": "^0.32.0",
+      "@graphprotocol/graph-ts": "^0.27.0",
+      "dotenv": "^16.0.3",
+      "js-yaml": "^4.1.0",
+      "node-vault": "^0.9.22"
+    }
+  }
+  

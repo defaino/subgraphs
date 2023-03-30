@@ -1,0 +1,5 @@
+export const GLOBAL_LIST_ID = "GlobalList";
+export const DEFI_CORE_ADDRESS = "0x0000000000000000000000000000000000000000";
+
+export const BLOCK_INTERVAL = 100;
+export const BATCH_SIZE = 50;

@@ -1,0 +1,29 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: DefiCore
+    network: mainnet
+    source:
+      address: "0x0000000000000000000000000000000000000000"
+      abi: DefiCore
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      file: ./src/mappings/DefiCore.ts
+      entities:
+        - User
+        - GlobalList
+      abis:
+        - name: DefiCore
+          file: ./abis/DefiCore.json
+      eventHandlers:
+        - event: Borrowed(indexed address,address,indexed bytes32,uint256,uint256)
+          handler: onBorrowed
+        - event: BorrowRepaid(indexed address,indexed bytes32,uint256,uint256)
+          handler: onBorrowRepaid
+      blockHandlers:
+        - handler: onBlock
