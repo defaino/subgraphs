@@ -17,5 +17,6 @@ jobs:
     - name: Build the Docker image
       run: |
             echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
-            docker build . --file LiquidationMonitor/docker/Dockerfile --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+            cd LiquidationMonitor
+            docker build . --file docker/Dockerfile --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
             docker push ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
