@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches:
+      - '**'
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+            docker build . --file LiquidationMonitor/docker/Dockerfile --tag ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
+            docker push ghcr.io/$GITHUB_REPOSITORY:$GITHUB_SHA
