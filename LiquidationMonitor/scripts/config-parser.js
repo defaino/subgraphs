@@ -3,6 +3,14 @@ const fs = require("fs");
 const pkg = require("../package.json");
 require("dotenv").config();
 
+// config = {
+//   "startBlock": 0,
+//   "projectName": "",
+//   "addresses": {
+//     "DefiCore": "0x..."
+//   }
+// }
+
 const vault = require("node-vault")({
   apiVersion: "v1",
   endpoint: process.env.VAULT_ENDPOINT,
@@ -10,9 +18,7 @@ const vault = require("node-vault")({
 });
 
 const subgraphConfig = "./subgraph.yaml";
-const contracts = [
-  "DefiCore",
-];
+const contract = "DefiCore";
 
 function validateConfig(config) {
   if (!config.startBlock || isNaN(parseInt(config.startBlock))) {
@@ -23,11 +29,10 @@ function validateConfig(config) {
     throw new Error(`Invalid addresses`);
   }
 
-  for (const contractName in config.addresses) {
-    if (!contracts.includes(contractName)) {
-      throw new Error(`Unknown contract ${contractName}`);
-    }
+  if (config.addresses[0] != contract) {
+    throw new Error(`Unknown contract ${config.addresses[0]}`);
   }
+
 }
 
 async function getConfig() {
@@ -38,12 +43,9 @@ async function getConfig() {
 
   const doc = yaml.load(fs.readFileSync(subgraphConfig, "utf8"));
 
-  for (const contractName in config.addresses) {
-    const index = doc.dataSources.findIndex((val) => val.name === contractName);
+  doc.dataSources[0].source.address = config.addresses[contract];
+  doc.dataSources[0].source.startBlock = config.startBlock;
 
-    doc.dataSources[index].source.address = config.addresses[contractName];
-    doc.dataSources[index].source.startBlock = config.startBlock;
-  }
 
   fs.writeFileSync(subgraphConfig, yaml.dump(doc));
 
@@ -62,11 +64,13 @@ async function getConfig() {
 
   fs.writeFileSync("./package.json", JSON.stringify(pkg));
 
-  let globalsFile = fs.readFileSync("./src/entities/Globals.ts")
+  const GlobalsFilePath = "../src/entities/Globals.ts";
 
-  let newContent = globalsFile.toString().replace('"0x0000000000000000000000000000000000000000"', config.addresses[contractName]);
+  let globalsFile = fs.readFileSync(GlobalsFilePath)
 
-  fs.writeFileSync(newContent);
+  let newContent = globalsFile.toString().replace('0x0000000000000000000000000000000000000000', config.addresses[contract]);
+
+  fs.writeFileSync(GlobalsFilePath, newContent);
 }
 
 getConfig().then();
