@@ -4,8 +4,8 @@ const pkg = require("../package.json");
 require("dotenv").config();
 
 // config = {
-//   "startBlock": 0,
-//   "projectName": "",
+//   "startBlock": 110,
+//   "projectName": "defi",
 //   "addresses": {
 //     "DefiCore": "0x..."
 //   }
@@ -29,8 +29,10 @@ function validateConfig(config) {
     throw new Error(`Invalid addresses`);
   }
 
-  if (config.addresses[0] != contract) {
-    throw new Error(`Unknown contract ${config.addresses[0]}`);
+  for (const contractName in config.addresses) {
+    if (contract != contractName) {
+      throw new Error(`Unknown contract ${contractName}`);
+    }
   }
 
 }
@@ -64,7 +66,7 @@ async function getConfig() {
 
   fs.writeFileSync("./package.json", JSON.stringify(pkg));
 
-  const GlobalsFilePath = "../src/entities/Globals.ts";
+  const GlobalsFilePath = "./src/entities/Globals.ts";
 
   let globalsFile = fs.readFileSync(GlobalsFilePath)
 

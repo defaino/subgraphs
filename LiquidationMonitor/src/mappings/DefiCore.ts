@@ -41,7 +41,9 @@ export function onBlock(block: ethereum.Block): void {
 
       for (let i = 0; i < iters; i++) {
         let currentInterval = globalList.list.slice(BATCH_SIZE * i, BATCH_SIZE * (i + 1));
-        let response = dcProptotype.try_getAvailableLiquidityBatch(bytesArrayToAddressArray(currentInterval));
+        let addressArray = bytesArrayToAddressArray(currentInterval);
+
+        let response = dcProptotype.try_getAvailableLiquidityBatch(addressArray);
 
         if (!response.reverted) {
           newLiquidationList = extendArray(
